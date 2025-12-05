@@ -257,22 +257,30 @@ window.addEventListener("load", () => {
 
     if (!img || !V || !GY) return;
 
-    const rect = img.getBoundingClientRect();
-    const top = rect.top + window.scrollY;
-    const bottom = top + rect.height;
+    // Force layout to settle
+    requestAnimationFrame(() => {
+      const rect = img.getBoundingClientRect();
+      const top = rect.top + window.scrollY;
 
-    // Position V (top-left of image)
-    V.style.top = (top + rect.height * 0.08) + "px";
-    V.style.left = (rect.left + rect.width * 0.06) + "px";
+      // V (top-left inside image)
+      V.style.position = "absolute";
+      V.style.top = (top + rect.height * 0.12) + "px";   // moved further DOWN
+      V.style.left = (rect.left + rect.width * 0.08) + "px";
 
-    // Position GY (bottom-right of image)
-    GY.style.top = (top + rect.height * 0.65) + "px";
-    GY.style.left = (rect.left + rect.width * 0.60) + "px";
+      // GY (bottom-right inside image)
+      GY.style.position = "absolute";
+      GY.style.top = (top + rect.height * 0.72) + "px";  // moved UP into image
+      GY.style.left = (rect.left + rect.width * 0.55) + "px";
+    });
   }
 
-  window.addEventListener("load", positionMobileLetters);
+  // Wait until layout + styles + images are fully ready
+  window.addEventListener("load", () => {
+    setTimeout(positionMobileLetters, 400); // let iOS settle layout
+  });
   window.addEventListener("resize", positionMobileLetters);
   window.addEventListener("scroll", positionMobileLetters);
+
 
   // ------------------------------
   // WAITLIST FORM → GOOGLE SHEETS
