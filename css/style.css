@@ -736,162 +736,75 @@ body {
 .countdown-overlay-label {
   opacity: 0.6;
 }
-/* =========================================================
-   MOBILE RESPONSIVE FIXES (max-width: 768px)
-   ========================================================= */
 @media (max-width: 768px) {
 
-  /* GENERAL LAYOUT */
-  body {
-    overflow-x: hidden;
+  /* ============================================
+     FRAME 1 — MOBILE MAGAZINE COVER LAYOUT
+     ============================================ */
+
+  .panel-intro {
+    padding: 24px 18px;
+  }
+
+  /* STACK EVERYTHING VERTICALLY */
+  .intro-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    gap: 20px;
+  }
+
+  /* MONOGRAM (V + GY AT THE TOP) */
+  .intro-left,
+  .intro-right {
+    margin: 0;
     padding: 0;
   }
 
-  .scroll-shell {
-    display: block;      /* No horizontal scroll on mobile */
-    height: auto;
-  }
-
-  .panels {
-    display: block;
-    transform: none !important;
-  }
-
-  .panel {
-    width: 100%;
-    min-height: 100vh;
-    padding: 24px 18px;
-    transform: none !important;
-  }
-
-  /* TYPOGRAPHY */
-  h1, h2, h3 {
-    font-size: 1.6rem;
-    line-height: 1.2;
-  }
-
-  p {
-    font-size: 0.95rem;
-    line-height: 1.45;
-  }
-
-  .mono {
-    font-size: 0.85rem;
-  }
-
-  /* COUNTDOWN PANEL */
-  .countdown-layout {
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  .countdown-left,
-  .countdown-right {
-    width: 100%;
-    text-align: left;
-  }
-
-  #countdown {
-    font-size: 1.4rem;
-    word-spacing: 4px;
-  }
-
-  /* FULLSCREEN COUNTDOWN OVERLAY */
-  #countdown-overlay {
-    padding: 0 20px;
-  }
-
-  #countdown-overlay-value {
-    font-size: 2rem !important;  /* readable but not oversized */
-  }
-
-  /* POSTER IMAGES */
-  .poster {
-    width: 100%;
-    height: auto;
-    margin: 0 auto 24px auto;
-  }
-
-  .poster img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-  }
-
-  /* GUIDE TICKS (PROGRESS DOTS) */
-  .guide-ticks {
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .guide-ticks .tick {
-    width: 6px;
-    height: 6px;
-  }
-
-  .guide-ticks .tick.active {
-    transform: scale(1.6);
-  }
-
-  /* SPACING FIXES */
-  section {
-    margin-bottom: 60px;
-  }
-}
-@media (max-width: 768px) {
-
-  /* FRAME 1 — INTRO FIX */
-  .intro-main {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 8px;
-  }
-
-  /* Make the V smaller & move it up */
   .intro-left .letter-v {
-    font-size: 22vw;   /* smaller V */
+    font-size: 22vw;
     line-height: 1;
-    margin-top: -10px;
-  }
-
-  /* Move GY next to V instead of bottom-right */
-  .intro-right {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: flex-start;
-    margin-top: 0;
   }
 
   .intro-gy {
     display: flex;
-    flex-direction: column;
-    gap: 0;
-    transform: translateY(-10px); /* moves GY up */
+    flex-direction: row;
+    gap: 6vw;
+    transform: translateY(-4vw);
   }
 
   .intro-gy .letter-g,
   .intro-gy .letter-y {
-    font-size: 20vw;  /* scales with screen */
+    font-size: 18vw;
     line-height: 1;
   }
 
-  /* Intro text goes below cleanly */
-  .intro-meta {
-    font-size: 0.9rem;
-    max-width: 80%;
-    margin-top: 12px;
+  /* GROUPED MONOGRAM BLOCK */
+  .intro-monogram-mobile {
+    display: flex;
+    align-items: flex-end;
+    gap: 5vw;
+    margin-bottom: 10px;
   }
 
-  /* Center the artwork and shrink slightly */
+  /* INTRO TEXT UNDER MONOGRAM */
+  .intro-meta {
+    max-width: 90%;
+    font-size: 0.95rem;
+  }
+
+  /* KEEP IMAGE LARGE */
   .intro-image img {
-    width: 80%;
-    max-width: 260px;
-    margin: 0 auto;
+    width: 100%;
+    max-width: 420px;     /* large on mobile */
+    height: auto;
     display: block;
   }
-}
 
+  /* Spacing fix */
+  .intro-main > * {
+    width: 100%;
+  }
+
+}
