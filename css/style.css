@@ -897,5 +897,36 @@ body {
     line-height: 0.8;
   }
 }
+@media (max-width: 768px) {
+
+  .intro-image {
+    position: relative;
+  }
+
+  .intro-monogram-mobile {
+    position: absolute;
+    top: 4vw;
+    left: 4vw;
+    z-index: 20;
+  }
+
+  .intro-gy {
+    position: absolute;
+    bottom: 4vw;
+    right: 4vw;
+    z-index: 20;
+  }
+
+  .intro-monogram-mobile .letter-v {
+    font-size: 20vw;
+    line-height: 0.8;
+  }
+
+  .intro-gy .letter-g,
+  .intro-gy .letter-y {
+    font-size: 16vw;
+    line-height: 0.8;
+  }
+}
 
 
