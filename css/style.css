@@ -835,117 +835,46 @@ body {
   }
 }
 /* ============================================
-   FULL MOBILE FIX FOR FRAME 1 (NO HTML CHANGE)
-   ============================================ */
+   MOBILE — FRAME 1 OVERLAPPING POSTER LAYOUT
+   (V top-left over image, GY bottom-right)
+============================================ */
 @media (max-width: 768px) {
 
-  /* Disable desktop grid completely */
+  /* --- disable desktop grid entirely --- */
   .intro-main {
     display: flex !important;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    gap: 20px;
+    gap: 22px;
+    position: relative;
   }
 
-  /* ------------------------------------------
-     1. V BLOCK (TOP)
-     ------------------------------------------ */
-  .intro-monogram-mobile {
-    width: 100%;
-    display: flex !important;
-    justify-content: center;
-    margin-top: 10px;
-    order: 1;
-  }
-
-  .intro-monogram-mobile .letter-v {
-    font-size: 24vw;
-    line-height: 0.8;
-  }
-
-  /* ------------------------------------------
-     2. GY BLOCK (RIGHT COLUMN ON DESKTOP)
-     We move it right under V using order
-     ------------------------------------------ */
-  .intro-gy {
-    order: 2;
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: center !important;
-    align-items: flex-end;
-    width: 100%;
-    gap: 3vw;
-    margin-top: -5vw;   /* visually binds GY to V */
-    margin-bottom: 5vw;
-  }
-
-  .intro-gy .letter-g,
-  .intro-gy .letter-y {
-    font-size: 18vw;
-    line-height: 0.8;
-  }
-
-  /* Kill the right column wrapper but keep its children */
-  .intro-right {
-    order: 4; /* moved AFTER the image */
-    display: flex !important;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
-
-  /* ------------------------------------------
-     3. IMAGE (CENTER POSTER)
-     ------------------------------------------ */
+  /* --- IMAGE becomes the anchor for V & GY --- */
   .intro-image {
+    position: relative;
     width: 100%;
-    max-width: 450px;
-    order: 3;
+    max-width: 460px;
+    order: 2;
+    margin: 10vw 0; /* spacing above and below */
   }
 
   .intro-image img {
     width: 100%;
-    height: auto;
     display: block;
-    object-fit: cover;
+    height: auto;
     border-radius: 6px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    object-fit: cover;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.18);
   }
 
-  /* ------------------------------------------
-     4. TEXT UNDER IMAGE
-     ------------------------------------------ */
-  .intro-meta {
-    order: 4;
-    max-width: 90%;
-    text-align: left !important;
-    margin-top: 10px;
-  }
-}
-/* ============================================
-   MOBILE — Make VGY appear on ONE single line
-   ============================================ */
-@media (max-width: 768px) {
-
-  /* Turn intro-main into a flexible vertical stack */
-  .intro-main {
-    display: flex !important;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-  }
-
-  /* ------------------------------
-     V (top-left block)
-     ------------------------------ */
+  /* --- V (top-left overlap) --- */
   .intro-monogram-mobile {
     order: 1;
-    display: flex !important;
-    justify-content: center;
-    align-items: baseline;
-    position: relative;
-    z-index: 5;
+    position: absolute;
+    left: 5vw;
+    top: -6vw;
+    z-index: 10;
   }
 
   .intro-monogram-mobile .letter-v {
@@ -953,18 +882,17 @@ body {
     line-height: 0.8;
   }
 
-  /* ------------------------------
-     GY (we move it next to V)
-     ------------------------------ */
+  /* --- GY (bottom-right overlap) --- */
   .intro-gy {
-    order: 1; /* SAME ORDER AS V → merges visually */
+    order: 3;
+    position: absolute;
+    right: 5vw;
+    bottom: -8vw;
+    z-index: 10;
+
     display: flex !important;
-    flex-direction: row !important;
-    gap: 1vw;
-    margin-left: 3vw; /* space between V and GY */
-    position: relative;
-    top: -2vw;  /* vertically align with V */
-    z-index: 5;
+    flex-direction: row;
+    gap: 2vw;
   }
 
   .intro-gy .letter-g,
@@ -973,29 +901,29 @@ body {
     line-height: 0.8;
   }
 
-  /* Remove original spacing rules from the right column */
+  /* --- ensure V & GY attach to the IMAGE --- */
+  .intro-image {
+    /* we wrap V + GY relative to the image */
+  }
+
   .intro-right {
-    order: 3;
+    order: 4;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start !important;
   }
 
-  /* -----------------------------------
-     IMAGE NOW COMES AFTER THE MONOGRAM
-     ----------------------------------- */
-  .intro-image {
-    order: 2;
-    width: 100%;
-    max-width: 430px;
-    margin-top: 20px;
+  /* --- text block under poster --- */
+  .intro-meta {
+    max-width: 92%;
+    margin-top: 14vw; /* leaves space for GY overlap */
+    text-align: left !important;
+    line-height: 1.6;
   }
 
-  .intro-meta {
-    order: 3;
-    max-width: 90%;
-    margin-top: 18px;
+  /* --- poster padding simplified on mobile --- */
+  .panel-intro .poster {
+    padding: 22px 18px !important;
   }
 }
-
