@@ -923,4 +923,79 @@ body {
     margin-top: 10px;
   }
 }
+/* ============================================
+   MOBILE — Make VGY appear on ONE single line
+   ============================================ */
+@media (max-width: 768px) {
+
+  /* Turn intro-main into a flexible vertical stack */
+  .intro-main {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  /* ------------------------------
+     V (top-left block)
+     ------------------------------ */
+  .intro-monogram-mobile {
+    order: 1;
+    display: flex !important;
+    justify-content: center;
+    align-items: baseline;
+    position: relative;
+    z-index: 5;
+  }
+
+  .intro-monogram-mobile .letter-v {
+    font-size: 22vw;
+    line-height: 0.8;
+  }
+
+  /* ------------------------------
+     GY (we move it next to V)
+     ------------------------------ */
+  .intro-gy {
+    order: 1; /* SAME ORDER AS V → merges visually */
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 1vw;
+    margin-left: 3vw; /* space between V and GY */
+    position: relative;
+    top: -2vw;  /* vertically align with V */
+    z-index: 5;
+  }
+
+  .intro-gy .letter-g,
+  .intro-gy .letter-y {
+    font-size: 18vw;
+    line-height: 0.8;
+  }
+
+  /* Remove original spacing rules from the right column */
+  .intro-right {
+    order: 3;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+
+  /* -----------------------------------
+     IMAGE NOW COMES AFTER THE MONOGRAM
+     ----------------------------------- */
+  .intro-image {
+    order: 2;
+    width: 100%;
+    max-width: 430px;
+    margin-top: 20px;
+  }
+
+  .intro-meta {
+    order: 3;
+    max-width: 90%;
+    margin-top: 18px;
+  }
+}
 
