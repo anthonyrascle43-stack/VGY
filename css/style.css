@@ -835,31 +835,28 @@ body {
   }
 }
 /* ============================================
-   FRAME 1 — MOBILE REBUILD WITHOUT HTML CHANGE
+   FULL MOBILE FIX FOR FRAME 1 (NO HTML CHANGE)
    ============================================ */
 @media (max-width: 768px) {
 
-  /* Kill desktop grid completely */
-  .panel-intro .poster {
-    padding: 22px 18px !important;
-  }
-
+  /* Disable desktop grid completely */
   .intro-main {
     display: flex !important;
     flex-direction: column;
     align-items: center;
-    gap: 24px;
     width: 100%;
+    gap: 20px;
   }
 
-  /* ---------- MONOGRAM (V + GY) ---------- */
-
-  /* The container with V only */
+  /* ------------------------------------------
+     1. V BLOCK (TOP)
+     ------------------------------------------ */
   .intro-monogram-mobile {
+    width: 100%;
     display: flex !important;
     justify-content: center;
-    width: 100%;
-    margin-bottom: -10px; /* pulls letters closer to image */
+    margin-top: 10px;
+    order: 1;
   }
 
   .intro-monogram-mobile .letter-v {
@@ -867,16 +864,20 @@ body {
     line-height: 0.8;
   }
 
-  /* The existing GY block (inside .intro-right) */
+  /* ------------------------------------------
+     2. GY BLOCK (RIGHT COLUMN ON DESKTOP)
+     We move it right under V using order
+     ------------------------------------------ */
   .intro-gy {
+    order: 2;
     display: flex !important;
     flex-direction: row !important;
     justify-content: center !important;
     align-items: flex-end;
-    gap: 3vw;
     width: 100%;
-    margin-top: -8vw; /* brings GY closer to V */
-    margin-bottom: 6vw;
+    gap: 3vw;
+    margin-top: -5vw;   /* visually binds GY to V */
+    margin-bottom: 5vw;
   }
 
   .intro-gy .letter-g,
@@ -885,37 +886,41 @@ body {
     line-height: 0.8;
   }
 
-  /* ---------- IMAGE ---------- */
+  /* Kill the right column wrapper but keep its children */
+  .intro-right {
+    order: 4; /* moved AFTER the image */
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
 
+  /* ------------------------------------------
+     3. IMAGE (CENTER POSTER)
+     ------------------------------------------ */
   .intro-image {
     width: 100%;
-    max-width: 430px;
-    border-radius: 6px;
-    overflow: hidden;
-    box-shadow: 0 12px 24px rgba(0,0,0,0.18);
+    max-width: 450px;
+    order: 3;
   }
 
   .intro-image img {
     width: 100%;
     height: auto;
+    display: block;
     object-fit: cover;
+    border-radius: 6px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
   }
 
-  /* ---------- TEXT BLOCK ---------- */
-
-  .intro-right {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start !important;
-    gap: 20px;
-  }
-
+  /* ------------------------------------------
+     4. TEXT UNDER IMAGE
+     ------------------------------------------ */
   .intro-meta {
-    max-width: 95%;
-    font-size: 1rem;
+    order: 4;
+    max-width: 90%;
     text-align: left !important;
-    line-height: 1.55;
+    margin-top: 10px;
   }
 }
 
