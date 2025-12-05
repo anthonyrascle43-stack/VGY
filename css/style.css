@@ -868,52 +868,6 @@ body {
     box-shadow: 0 8px 28px rgba(0,0,0,0.18);
   }
 
-  /* --- V (top-left overlap) --- */
-  .intro-monogram-mobile {
-    order: 1;
-    position: absolute;
-    left: 5vw;
-    top: -6vw;
-    z-index: 10;
-  }
-
-  .intro-monogram-mobile .letter-v {
-    font-size: 22vw;
-    line-height: 0.8;
-  }
-
-  /* --- GY (bottom-right overlap) --- */
-  .intro-gy {
-    order: 3;
-    position: absolute;
-    right: 5vw;
-    bottom: -8vw;
-    z-index: 10;
-
-    display: flex !important;
-    flex-direction: row;
-    gap: 2vw;
-  }
-
-  .intro-gy .letter-g,
-  .intro-gy .letter-y {
-    font-size: 18vw;
-    line-height: 0.8;
-  }
-
-  /* --- ensure V & GY attach to the IMAGE --- */
-  .intro-image {
-    /* we wrap V + GY relative to the image */
-  }
-
-  .intro-right {
-    order: 4;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start !important;
-  }
-
   /* --- text block under poster --- */
   .intro-meta {
     max-width: 92%;
@@ -967,9 +921,9 @@ body {
      GY — inside BOTTOM-RIGHT of image
   -------------------------------- */
   .intro-gy {
-    bottom: 12vw;     /* UPWARD into the image */
+    bottom: 25vw;     /* UPWARD into the image */
     right: 6vw;       /* offset from right edge */
-    z-index: 20;
+    z-index: 30;
     display: flex !important;
     flex-direction: row;
     gap: 2vw;
@@ -977,7 +931,7 @@ body {
 
   .intro-gy .letter-g,
   .intro-gy .letter-y {
-    font-size: 16vw;
+    font-size: 15vw;
     line-height: 0.8;
   }
 
