@@ -927,3 +927,49 @@ body {
     padding: 22px 18px !important;
   }
 }
+/* ============================================
+   MOBILE — FINE TUNING FOR V + GY OVER IMAGE
+============================================ */
+@media (max-width: 768px) {
+
+  /* Ensure image is positioning context */
+  .intro-image {
+    position: relative;
+  }
+
+  /* --- V (top-left, moved down INTO the image) --- */
+  .intro-monogram-mobile {
+    position: absolute;
+    top: 3vw;       /* move down (was -6vw) */
+    left: 5vw;      /* softened left offset */
+    z-index: 10;
+  }
+
+  .intro-monogram-mobile .letter-v {
+    font-size: 20vw; /* slightly smaller for elegance */
+    line-height: 0.8;
+  }
+
+  /* --- GY (bottom-right, pulled UP into image) --- */
+  .intro-gy {
+    position: absolute;
+    bottom: 5vw;     /* pull upward (was -8vw) */
+    right: 5vw;      /* keep margin from edge */
+    z-index: 10;
+
+    display: flex !important;
+    flex-direction: row;
+    gap: 2vw;
+  }
+
+  .intro-gy .letter-g,
+  .intro-gy .letter-y {
+    font-size: 17vw;  /* slightly smaller */
+    line-height: 0.8;
+  }
+
+  /* Add spacing below image so GY doesn’t overlap the text */
+  .intro-meta {
+    margin-top: 16vw; 
+  }
+}
