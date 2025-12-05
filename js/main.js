@@ -1,3 +1,12 @@
+// DISABLE HORIZONTAL SCROLL ANIMATION ON MOBILE
+const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+if (!isMobile) {
+  // ONLY run GSAP horizontal scroll on desktop
+  gsap.registerPlugin(ScrollTrigger);
+} else {
+  console.log("Mobile mode: horizontal scroll disabled");
+}
 gsap.registerPlugin(ScrollTrigger);
 
 window.addEventListener("load", () => {
@@ -6,7 +15,7 @@ window.addEventListener("load", () => {
   const ticks = gsap.utils.toArray(".guide-ticks .tick");
 
   if (!panels.length || !container) return;
-
+if (!isMobile) {
   // ================================
   // HORIZONTAL SCROLL (pinned)
   // ================================
@@ -91,7 +100,7 @@ ScrollTrigger.create({
       }
     });
   });
-
+}
   // ================================
   // Active tick per frame
   // ================================
