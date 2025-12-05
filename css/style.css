@@ -835,12 +835,12 @@ body {
   }
 }
 /* ============================================
-   MOBILE — FRAME 1 OVERLAPPING POSTER LAYOUT
-   (V top-left over image, GY bottom-right)
+   MOBILE — FINAL CLEAN OVERLAP LAYOUT
+   (V top-left over poster, GY bottom-right)
 ============================================ */
 @media (max-width: 768px) {
 
-  /* --- disable desktop grid entirely --- */
+  /* Disable desktop grid */
   .intro-main {
     display: flex !important;
     flex-direction: column;
@@ -850,13 +850,13 @@ body {
     position: relative;
   }
 
-  /* --- IMAGE becomes the anchor for V & GY --- */
+  /* IMAGE becomes the anchor */
   .intro-image {
-    position: relative;
+    position: relative !important;
     width: 100%;
     max-width: 460px;
     order: 2;
-    margin: 10vw 0; /* spacing above and below */
+    margin: 12vw 0 14vw 0; /* spacing above and below for overlaps */
   }
 
   .intro-image img {
@@ -868,52 +868,26 @@ body {
     box-shadow: 0 8px 28px rgba(0,0,0,0.18);
   }
 
-  /* --- text block under poster --- */
-  .intro-meta {
-    max-width: 92%;
-    margin-top: 14vw; /* leaves space for GY overlap */
-    text-align: left !important;
-    line-height: 1.6;
-  }
-
-  /* --- poster padding simplified on mobile --- */
-  .panel-intro .poster {
-    padding: 22px 18px !important;
-  }
-}
-/* ============================================
-   MOBILE — CORRECTED ANCHOR + PERFECT POSITIONING
-============================================ */
-@media (max-width: 768px) {
-
-  /* Force the image to be the anchor */
-  .intro-image {
-    position: relative !important;
-    width: 100%;
-    max-width: 460px;
-    margin: 0 auto;
-    order: 2;
-  }
-
-  /* Remove any previous top/bottom offsets */
+  /* Remove ALL previous positioning */
   .intro-monogram-mobile,
   .intro-gy {
     position: absolute !important;
     margin: 0 !important;
     padding: 0 !important;
+    inset: auto !important;
   }
 
   /* -------------------------------
      V — inside TOP-LEFT of image
   -------------------------------- */
   .intro-monogram-mobile {
-    top: 12vw;       /* DOWN into the image */
-    left: 6vw;       /* offset from left edge */
+    top: 10vw;     /* move DOWN */
+    left: 6vw;     /* slight right offset */
     z-index: 20;
   }
 
   .intro-monogram-mobile .letter-v {
-    font-size: 20vw;
+    font-size: 18vw;
     line-height: 0.8;
   }
 
@@ -921,9 +895,10 @@ body {
      GY — inside BOTTOM-RIGHT of image
   -------------------------------- */
   .intro-gy {
-    bottom: 25vw;     /* UPWARD into the image */
-    right: 6vw;       /* offset from right edge */
-    z-index: 30;
+    bottom: 20vw;   /* PULL UP strongly */
+    right: 6vw;     /* right offset matching V */
+    z-index: 20;
+
     display: flex !important;
     flex-direction: row;
     gap: 2vw;
@@ -931,13 +906,21 @@ body {
 
   .intro-gy .letter-g,
   .intro-gy .letter-y {
-    font-size: 15vw;
+    font-size: 14vw;
     line-height: 0.8;
   }
 
-  /* Push text further down so GY never overlaps */
+  /* Push text down so GY never overlaps it */
   .intro-meta {
-    margin-top: 25vw;
+    max-width: 92%;
+    text-align: left !important;
+    line-height: 1.6;
+    margin-top: 20vw;
+  }
+
+  /* Fix poster padding */
+  .panel-intro .poster {
+    padding: 22px 18px !important;
   }
 }
 
