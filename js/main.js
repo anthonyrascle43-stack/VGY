@@ -250,6 +250,39 @@ window.addEventListener("load", () => {
       }, 1000);
     }, 2500);
   }
+    function positionMobileLetters() {
+      if (window.innerWidth > 768) return; // ⛔ STOP — desktop should NEVER run this
+
+      const img = document.querySelector(".intro-image");
+      const V = document.querySelector(".intro-monogram-mobile");
+      const GY = document.querySelector(".intro-gy");
+
+      if (!img || !V || !GY) return;
+
+      requestAnimationFrame(() => {
+        const rect = img.getBoundingClientRect();
+        const imgTop = rect.top + window.scrollY;
+
+        // V top-left inside poster
+        V.style.position = "absolute";
+        V.style.top  = (imgTop + rect.height * 0.18) + "px";
+        V.style.left = (rect.left + rect.width  * 0.08) + "px";
+
+        // GY bottom-right inside poster
+        GY.style.position = "absolute";
+        GY.style.top  = (imgTop + rect.height * 0.70) + "px";
+        GY.style.left = (rect.left + rect.width * 0.55) + "px";
+      });
+    }
+
+    // Run ONLY on mobile
+    if (window.innerWidth <= 768) {
+      window.addEventListener("load", () => {
+        setTimeout(positionMobileLetters, 300);
+      });
+      window.addEventListener("resize", positionMobileLetters);
+      window.addEventListener("scroll", positionMobileLetters);
+    }
 
   // ------------------------------
   // WAITLIST FORM → GOOGLE SHEETS
