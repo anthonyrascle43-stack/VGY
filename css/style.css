@@ -839,4 +839,59 @@ body {
     margin-bottom: 60px;
   }
 }
+@media (max-width: 768px) {
+
+  /* FRAME 1 — INTRO FIX */
+  .intro-main {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  /* Make the V smaller & move it up */
+  .intro-left .letter-v {
+    font-size: 22vw;   /* smaller V */
+    line-height: 1;
+    margin-top: -10px;
+  }
+
+  /* Move GY next to V instead of bottom-right */
+  .intro-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    margin-top: 0;
+  }
+
+  .intro-gy {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    transform: translateY(-10px); /* moves GY up */
+  }
+
+  .intro-gy .letter-g,
+  .intro-gy .letter-y {
+    font-size: 20vw;  /* scales with screen */
+    line-height: 1;
+  }
+
+  /* Intro text goes below cleanly */
+  .intro-meta {
+    font-size: 0.9rem;
+    max-width: 80%;
+    margin-top: 12px;
+  }
+
+  /* Center the artwork and shrink slightly */
+  .intro-image img {
+    width: 80%;
+    max-width: 260px;
+    margin: 0 auto;
+    display: block;
+  }
+}
 
