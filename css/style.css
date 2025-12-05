@@ -877,41 +877,25 @@ body {
     inset: auto !important;
   }
 
-/* ============================================
-   MOBILE — FINAL WORKING POSITION (TRANSFORM)
-============================================ */
-@media (max-width: 768px) {
-
-  .intro-monogram-mobile {
-    position: absolute;
-    z-index: 20;
-    /* anchor relative to intro-main */
-    top: 45vw;               /* pushes it DOWN into the image */
-    left: 8vw;
-    transform: translateY(-50%);  /* fine-tune */
+  /* make them absolute to the viewport */
+  .intro-monogram-mobile,
+  .intro-gy {
+    z-index: 50;
+    pointer-events: none; /* don’t block taps */
   }
 
+  /* V size + default offset */
   .intro-monogram-mobile .letter-v {
     font-size: 20vw;
     line-height: 0.8;
   }
 
-  .intro-gy {
-    position: absolute;
-    z-index: 20;
-    /* anchor relative to intro-main */
-    top: 110vw;               /* pushes it UP into the bottom of image */
-    right: 8vw;
-    transform: translateY(-50%);
-    display: flex;
-    gap: 2vw;
-  }
-
+  /* GY size */
   .intro-gy .letter-g,
   .intro-gy .letter-y {
     font-size: 16vw;
     line-height: 0.8;
   }
 }
-}
+
 

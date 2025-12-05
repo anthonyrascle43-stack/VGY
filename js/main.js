@@ -250,6 +250,29 @@ window.addEventListener("load", () => {
       }, 1000);
     }, 2500);
   }
+  function positionMobileLetters() {
+    const img = document.querySelector(".intro-image");
+    const V = document.querySelector(".intro-monogram-mobile");
+    const GY = document.querySelector(".intro-gy");
+
+    if (!img || !V || !GY) return;
+
+    const rect = img.getBoundingClientRect();
+    const top = rect.top + window.scrollY;
+    const bottom = top + rect.height;
+
+    // Position V (top-left of image)
+    V.style.top = (top + rect.height * 0.08) + "px";
+    V.style.left = (rect.left + rect.width * 0.06) + "px";
+
+    // Position GY (bottom-right of image)
+    GY.style.top = (top + rect.height * 0.65) + "px";
+    GY.style.left = (rect.left + rect.width * 0.60) + "px";
+  }
+
+  window.addEventListener("load", positionMobileLetters);
+  window.addEventListener("resize", positionMobileLetters);
+  window.addEventListener("scroll", positionMobileLetters);
 
   // ------------------------------
   // WAITLIST FORM → GOOGLE SHEETS
