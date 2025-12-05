@@ -834,4 +834,88 @@ body {
     min-height: 100vh;
   }
 }
+/* ============================================
+   FRAME 1 — MOBILE REBUILD WITHOUT HTML CHANGE
+   ============================================ */
+@media (max-width: 768px) {
+
+  /* Kill desktop grid completely */
+  .panel-intro .poster {
+    padding: 22px 18px !important;
+  }
+
+  .intro-main {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
+  }
+
+  /* ---------- MONOGRAM (V + GY) ---------- */
+
+  /* The container with V only */
+  .intro-monogram-mobile {
+    display: flex !important;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: -10px; /* pulls letters closer to image */
+  }
+
+  .intro-monogram-mobile .letter-v {
+    font-size: 24vw;
+    line-height: 0.8;
+  }
+
+  /* The existing GY block (inside .intro-right) */
+  .intro-gy {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: flex-end;
+    gap: 3vw;
+    width: 100%;
+    margin-top: -8vw; /* brings GY closer to V */
+    margin-bottom: 6vw;
+  }
+
+  .intro-gy .letter-g,
+  .intro-gy .letter-y {
+    font-size: 18vw;
+    line-height: 0.8;
+  }
+
+  /* ---------- IMAGE ---------- */
+
+  .intro-image {
+    width: 100%;
+    max-width: 430px;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.18);
+  }
+
+  .intro-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  /* ---------- TEXT BLOCK ---------- */
+
+  .intro-right {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 20px;
+  }
+
+  .intro-meta {
+    max-width: 95%;
+    font-size: 1rem;
+    text-align: left !important;
+    line-height: 1.55;
+  }
+}
 
