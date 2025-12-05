@@ -14,7 +14,9 @@ window.addEventListener("load", () => {
 
   if (!panels.length || !container) return;
 
+  // ================================
   // DESKTOP ONLY — horizontal scroll
+  // ================================
   if (!isMobile) {
     hScroll = gsap.to(panels, {
       xPercent: -100 * (panels.length - 1),
@@ -72,7 +74,7 @@ window.addEventListener("load", () => {
       });
     }
 
-    // Wavy drift per panel
+    // Subtle vertical drift per panel
     panels.forEach((panel, index) => {
       const direction = index % 2 === 0 ? -1 : 1;
       gsap.to(panel, {
@@ -175,137 +177,61 @@ window.addEventListener("load", () => {
 
     let progress = 0; // 0 → 1, controls left→right reveal
 
-function drawWave() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+    function drawWave() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  const midY   = canvas.height * 0.5;
-  const pairs  = 9;                     // 9 pairs = 18 lines total
-  const maxAmp = canvas.height * 0.16;   // height of main bulge
+      const midY   = canvas.height * 0.5;
+      const pairs  = 9;
+      const maxAmp = canvas.height * 0.16;
+      const spacing = 8;
+      const maxX = canvas.width * progress;
 
-  const spacing = 8;                     // distance between contour lines
+      for (let p = 0; p < pairs; p++) {
+        const amp = maxAmp * (1 - p * 0.07);
+        const offset = spacing * (p + 1);
 
-  const maxX = canvas.width * progress;
+        // upper line
+        ctx.beginPath();
+        ctx.lineWidth = 1.4;
+        ctx.strokeStyle = `rgba(235,235,235,${0.95 - p * 0.03})`;
 
-  for (let p = 0; p < pairs; p++) {
-    const amp = maxAmp * (1 - p * 0.07);   // smaller as we go outward
-    const offset = spacing * (p + 1);      // vertical distance from midline
+        for (let x = 0; x <= maxX; x++) {
+          const nx = x / canvas.width;
+          const envelope = Math.exp(-((nx - 0.5) ** 2) * 18);
+          const carrier =
+            Math.sin(nx * 8 * Math.PI) * 0.85 +
+            Math.sin(nx * 16 * Math.PI) * 0.35;
 
-    // ========= UPPER LINE =========
-    ctx.beginPath();
-    ctx.lineWidth = 1.4;
-    ctx.strokeStyle = `rgba(235,235,235,${0.95 - p * 0.03})`;
+          const y = midY - (carrier * envelope * amp) - offset;
+          if (x === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
 
-    for (let x = 0; x <= maxX; x++) {
-      const nx = x / canvas.width;
+        // lower mirrored line
+        ctx.beginPath();
+        ctx.lineWidth = 1.4;
+        ctx.strokeStyle = `rgba(235,235,235,${0.95 - p * 0.03})`;
 
-      const envelope = Math.exp(-((nx - 0.5) ** 2) * 18);
+        for (let x = 0; x <= maxX; x++) {
+          const nx = x / canvas.width;
+          const envelope = Math.exp(-((nx - 0.5) ** 2) * 18);
+          const carrier =
+            Math.sin(nx * 8 * Math.PI) * 0.85 +
+            Math.sin(nx * 16 * Math.PI) * 0.35;
 
-      // Multi-oscillation carrier
-      const carrier =
-        Math.sin(nx * 8 * Math.PI) * 0.85 +
-        Math.sin(nx * 16 * Math.PI) * 0.35;
+          const y = midY + (carrier * envelope * amp) + offset;
+          if (x === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
 
-      const y = midY - (carrier * envelope * amp) - offset;
+      progress += 0.012;
+      if (progress > 1) progress = 1;
 
-      if (x === 0) ctx.moveTo(x, y);
-      else ctx.lineTo(x, y);
+      requestAnimationFrame(drawWave);
     }
-    ctx.stroke();
-
-    // ========= LOWER MIRRORED LINE =========
-    ctx.beginPath();
-    ctx.lineWidth = 1.4;
-    ctx.strokeStyle = `rgba(235,235,235,${0.95 - p * 0.03})`;
-
-    for (let x = 0; x <= maxX; x++) {
-      const nx = x / canvas.width;
-
-      const envelope = Math.exp(-((nx - 0.5) ** 2) * 18);
-
-      const carrier =
-        Math.sin(nx * 8 * Math.PI) * 0.85 +
-        Math.sin(nx * 16 * Math.PI) * 0.35;
-
-      const y = midY + (carrier * envelope * amp) + offset;
-
-      if (x === 0) ctx.moveTo(x, y);
-      else ctx.lineTo(x, y);
-    }
-    ctx.stroke();
-  }
-
-  // Reveal left → right
-  progress += 0.012;
-  if (progress > 1) progress = 1;
-
-  requestAnimationFrame(drawWave);
-}
-// ------------------------------
-// WAITLIST FORM → GOOGLE SHEETS
-// ------------------------------
-
-const waitlistForm = document.getElementById("waitlist-form");
-const waitlistLoader = document.getElementById("waitlist-loader");
-const waitlistSuccess = document.getElementById("waitlist-success");
-
-if (waitlistForm) {
-  waitlistForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    // Show loader instantly
-    waitlistLoader.style.display = "flex";
-    gsap.to(waitlistLoader, { opacity: 1, duration: 0.2 });
-
-    // Submit form to Google Sheets through hidden iframe
-    waitlistForm.submit();
-
-    // Wait 350ms then show success UI
-    setTimeout(() => {
-      finishWaitlist();
-    }, 350);
-  });
-}
-
-function finishWaitlist() {
-  gsap.to(waitlistLoader, {
-    opacity: 0,
-    duration: 0.3,
-    onComplete: () => {
-      waitlistLoader.style.display = "none";
-      waitlistForm.style.display = "none";
-      waitlistSuccess.style.display = "block";
-
-      gsap.fromTo(
-        waitlistSuccess,
-        { opacity: 0, y: 10 },
-        { opacity: 1, y: 0, duration: 0.4 }
-      );
-    }
-  });
-}
-
-// ------------------------------
-// UNIFIED SUCCESS HANDLER
-// ------------------------------
-function finishWaitlist() {
-  gsap.to(waitlistLoader, {
-    opacity: 0,
-    duration: 0.3,
-    onComplete: () => {
-      waitlistLoader.style.display = "none";
-
-      waitlistForm.style.display = "none";
-      waitlistSuccess.style.display = "block";
-
-      gsap.fromTo(
-        waitlistSuccess,
-        { opacity: 0, y: 10 },
-        { opacity: 1, y: 0, duration: 0.4 }
-      );
-    }
-  });
-}
-
 
     drawWave();
 
@@ -313,10 +239,61 @@ function finishWaitlist() {
     setTimeout(() => {
       const loader = document.getElementById("loader");
       if (!loader) return;
+
       loader.style.transition = "opacity 1s ease";
       loader.style.opacity = "0";
-      setTimeout(() => loader.remove(), 1000);
+
+      setTimeout(() => {
+        loader.style.pointerEvents = "none";
+        loader.style.visibility = "hidden";
+        loader.style.display = "none";
+      }, 1000);
     }, 2500);
   }
-})
+
+  // ------------------------------
+  // WAITLIST FORM → GOOGLE SHEETS
+  // ------------------------------
+  const waitlistForm = document.getElementById("waitlist-form");
+  const waitlistLoader = document.getElementById("waitlist-loader");
+  const waitlistSuccess = document.getElementById("waitlist-success");
+
+  if (waitlistForm) {
+    waitlistForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      if (waitlistLoader) {
+        waitlistLoader.style.display = "flex";
+        gsap.to(waitlistLoader, { opacity: 1, duration: 0.2 });
+      }
+
+      waitlistForm.submit();
+
+      setTimeout(() => {
+        finishWaitlist(waitlistForm, waitlistLoader, waitlistSuccess);
+      }, 350);
+    });
+  }
+
+  function finishWaitlist(form, loaderEl, successEl) {
+    if (!form || !successEl) return;
+
+    gsap.to(loaderEl, {
+      opacity: 0,
+      duration: 0.3,
+      onComplete: () => {
+        if (loaderEl) loaderEl.style.display = "none";
+
+        form.style.display = "none";
+        successEl.style.display = "block";
+
+        gsap.fromTo(
+          successEl,
+          { opacity: 0, y: 10 },
+          { opacity: 1, y: 0, duration: 0.4 }
+        );
+      }
+    });
+  }
+});
 

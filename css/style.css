@@ -809,4 +809,29 @@ body {
     padding: 24px 18px !important;
   }
 }
+/* =========================================
+   MOBILE SCROLL BEHAVIOUR
+   ========================================= */
+@media (max-width: 768px) {
+  /* Let the page grow vertically instead of fixed 100vh scroller */
+  .scroll-shell {
+    height: auto;
+    overflow: visible;
+  }
+
+  .panels {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .panel {
+    min-width: 100%;
+    height: auto;
+  }
+
+  /* Keep each "poster" at least full height for the nice full-screen feel */
+  .poster {
+    min-height: 100vh;
+  }
+}
 
