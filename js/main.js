@@ -250,37 +250,6 @@ window.addEventListener("load", () => {
       }, 1000);
     }, 2500);
   }
-  function positionMobileLetters() {
-    const img = document.querySelector(".intro-image");
-    const V = document.querySelector(".intro-monogram-mobile");
-    const GY = document.querySelector(".intro-gy");
-
-    if (!img || !V || !GY) return;
-
-    // Force layout to settle
-    requestAnimationFrame(() => {
-      const rect = img.getBoundingClientRect();
-      const top = rect.top + window.scrollY;
-
-      // V (top-left inside image)
-      V.style.position = "absolute";
-      V.style.top = (top + rect.height * 0.12) + "px";   // moved further DOWN
-      V.style.left = (rect.left + rect.width * 0.08) + "px";
-
-      // GY (bottom-right inside image)
-      GY.style.position = "absolute";
-      GY.style.top = (top + rect.height * 0.72) + "px";  // moved UP into image
-      GY.style.left = (rect.left + rect.width * 0.55) + "px";
-    });
-  }
-
-  // Wait until layout + styles + images are fully ready
-  window.addEventListener("load", () => {
-    setTimeout(positionMobileLetters, 400); // let iOS settle layout
-  });
-  window.addEventListener("resize", positionMobileLetters);
-  window.addEventListener("scroll", positionMobileLetters);
-
 
   // ------------------------------
   // WAITLIST FORM → GOOGLE SHEETS
