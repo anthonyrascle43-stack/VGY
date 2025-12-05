@@ -736,91 +736,107 @@ body {
 .countdown-overlay-label {
   opacity: 0.6;
 }
-/* =========================================
-   MOBILE LAYOUT — vertical mode
-========================================= */
+/* =========================================================
+   MOBILE RESPONSIVE FIXES (max-width: 768px)
+   ========================================================= */
 @media (max-width: 768px) {
 
+  /* GENERAL LAYOUT */
+  body {
+    overflow-x: hidden;
+    padding: 0;
+  }
+
   .scroll-shell {
-    overflow: visible;
+    display: block;      /* No horizontal scroll on mobile */
     height: auto;
   }
 
   .panels {
     display: block;
-    height: auto;
     transform: none !important;
   }
 
   .panel {
-    height: auto;
-    min-height: 100vh;
     width: 100%;
-    padding: 40px 20px;
+    min-height: 100vh;
+    padding: 24px 18px;
     transform: none !important;
   }
 
-  /* Fix double columns turning into clean stacked blocks */
-  .intro-layout,
-  .essay-layout,
-  .countdown-layout,
-  .wait-layout {
-    display: block;
-  }
-
-  /* TEXT SCALES */
-  h1, h2, .serif {
-    font-size: clamp(22px, 6vw, 32px);
+  /* TYPOGRAPHY */
+  h1, h2, h3 {
+    font-size: 1.6rem;
     line-height: 1.2;
   }
 
-  .letter {
-    font-size: 22vw !important;
+  p {
+    font-size: 0.95rem;
+    line-height: 1.45;
   }
 
   .mono {
-    font-size: 14px;
+    font-size: 0.85rem;
   }
 
-  /* HERO IMAGE */
-  .intro-image img,
-  .music-cover img {
+  /* COUNTDOWN PANEL */
+  .countdown-layout {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .countdown-left,
+  .countdown-right {
+    width: 100%;
+    text-align: left;
+  }
+
+  #countdown {
+    font-size: 1.4rem;
+    word-spacing: 4px;
+  }
+
+  /* FULLSCREEN COUNTDOWN OVERLAY */
+  #countdown-overlay {
+    padding: 0 20px;
+  }
+
+  #countdown-overlay-value {
+    font-size: 2rem !important;  /* readable but not oversized */
+  }
+
+  /* POSTER IMAGES */
+  .poster {
+    width: 100%;
+    height: auto;
+    margin: 0 auto 24px auto;
+  }
+
+  .poster img {
     width: 100%;
     height: auto;
     object-fit: cover;
   }
 
-  /* COUNTDOWN */
-  .countdown-right {
-    text-align: center;
-    margin-top: 20px;
+  /* GUIDE TICKS (PROGRESS DOTS) */
+  .guide-ticks {
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
-  #countdown {
-    font-size: 6vw;
+  .guide-ticks .tick {
+    width: 6px;
+    height: 6px;
   }
 
-  /* WAVE LOADER FULL WIDTH */
-  #waveCanvas {
-    width: 100% !important;
-    height: 60vh !important;
+  .guide-ticks .tick.active {
+    transform: scale(1.6);
   }
 
-  /* WAITLIST FORM */
-  .wait-left,
-  .wait-right {
-    width: 100%;
-    padding: 0;
-  }
-
-  .wait-form input,
-  .wait-form button {
-    width: 100%;
-    font-size: 16px;
-  }
-
-  /* REMOVE MOBILE OVERFLOW */
-  body {
-    overflow-x: hidden !important;
+  /* SPACING FIXES */
+  section {
+    margin-bottom: 60px;
   }
 }
+
