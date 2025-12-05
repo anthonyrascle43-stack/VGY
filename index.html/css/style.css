@@ -1,0 +1,738 @@
+/* =========================================
+   RESET
+========================================= */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+/* =========================================
+   BASE STYLES
+========================================= */
+
+body {
+  font-family: "Space Grotesk", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #efece6; /* editorial off-white */
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.025) 1px, transparent 1px);
+  background-size: 40px 40px;
+  color: #111;
+  overflow-x: hidden;
+}
+
+.serif { font-family: "EB Garamond", "Times New Roman", serif; }
+.mono  { font-family: "IBM Plex Mono", monospace; }
+
+.small { font-size: 0.9rem; }
+.tiny  {
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.faded { opacity: 0.65; }
+
+/* accent colors */
+
+.accent-blue  { color: #1434A4; }
+.accent-green { color: #00d46a; }
+
+/* =========================================
+   GRAIN OVERLAY
+========================================= */
+
+.paper-noise {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  mix-blend-mode: multiply;
+  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+  z-index: 0;
+}
+
+/* =========================================
+   HORIZONTAL SCROLL WRAPPER
+========================================= */
+
+.scroll-shell {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.panels {
+  display: flex;
+  height: 100%;
+}
+
+.panel {
+  min-width: 100vw;
+  height: 100vh;
+  display: flex;
+}
+
+.poster {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 56px 72px;
+  display: flex;
+}
+
+@media (max-width: 900px) {
+  .poster {
+    padding: 32px 20px;
+  }
+}
+
+/* =========================================
+   FRAME GUIDE / TIMELINE (bottom)
+========================================= */
+
+/* Clean timeline bar */
+.frame-guide {
+  position: fixed;
+  bottom: 1.5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2000px;
+  height: 30px;
+  background: rgba(239,236,230,0.75);
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.guide-track {
+  width: 85%;
+  height: 2px;
+  background: rgba(0,0,0,0.35);
+  position: relative;
+}
+
+/* static dots under the bar */
+.guide-ticks {
+  position: fixed;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 150px;
+  z-index: 51;
+}
+
+.guide-ticks .tick {
+  width: 8px;
+  height: 8px;
+  background: #111;
+  border-radius: 50%;
+  opacity: 0.75;
+  display: inline-block;
+  text-indent: -9999px; /* hide labels but keep them in DOM */
+}
+
+.guide-ticks .tick.active {
+  opacity: 1;
+}
+
+
+/* =========================================
+   FRAME 1 — INTRO / HERO
+========================================= */
+
+.panel-intro .poster {
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.intro-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+
+.intro-mark {
+  font-size: 0.75rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.intro-main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.2fr) minmax(0, 1.1fr);
+  column-gap: 40px;
+  align-items: flex-end;
+}
+
+.intro-col {
+  position: relative;
+}
+
+/* left column — **huge** V */
+
+.intro-left {
+  display: flex;
+  align-items: flex-end;
+}
+
+.letter {
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.12em;
+  line-height: 0.8;
+}
+
+.letter-v {
+  font-size: clamp(10rem, 20vw, 17rem);
+}
+
+/* middle image */
+
+.intro-image {
+  position: relative;
+  background: #d6d2cb;
+  border-radius: 4px;
+  overflow: hidden;
+  align-self: stretch;
+  box-shadow: 0 24px 40px rgba(0, 0, 0, 0.16);
+  z-index: 2;
+  margin-bottom: -12px;
+}
+
+.intro-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.85) contrast(1.02);
+}
+
+/* right column — text + GY */
+
+.intro-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 18px;
+}
+
+.intro-meta {
+  max-width: 260px;
+  text-align: right;
+  line-height: 1.6;
+}
+
+.intro-gy {
+  line-height: 0.8;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  z-index: 1;
+}
+
+.letter-g,
+.letter-y {
+  font-size: clamp(8rem, 16vw, 13rem);
+}
+
+.letter-y {
+  margin-right: 0.2em;
+}
+
+/* =========================================
+   FRAME 2 — ESSAY + MUSIC SPREAD
+========================================= */
+
+.essay-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.3fr);
+  column-gap: 60px;
+}
+
+.essay-left,
+.essay-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.essay-title {
+  font-size: clamp(2.2rem, 3.4vw, 2.8rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  text-transform: lowercase;
+  margin: 14px 0 20px;
+}
+
+.essay-body {
+  max-width: 430px;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.essay-body p + p {
+  margin-top: 16px;
+}
+
+/* right side — music inspo */
+
+.music-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.music-brand {
+  font-size: 0.9rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.music-title {
+  font-size: clamp(2.4rem, 3.8vw, 3rem);
+  text-transform: lowercase;
+  letter-spacing: -0.05em;
+  margin-bottom: 24px;
+}
+
+.music-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.music-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.music-cover {
+  position: relative;
+  width: 100%;
+  padding-top: 110%;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 16px 26px rgba(0, 0, 0, 0.18);
+  background:
+    linear-gradient(135deg, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.02)),
+    rgba(0, 0, 0, 0.06);
+}
+
+.music-cover img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.music-meta .track {
+  font-size: 0.83rem;
+}
+
+.music-meta .artist {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.music-caption {
+  font-size: 0.9rem;
+  line-height: 1.9;
+  max-width: 420px;
+}
+
+/* =========================================
+   FRAME 3 — COUNTDOWN
+========================================= */
+
+.countdown-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr);
+  column-gap: 56px;
+  align-items: center;
+}
+
+.countdown-left {
+  max-width: 420px;
+}
+
+.countdown-title {
+  font-size: clamp(2.1rem, 3.3vw, 2.7rem);
+  letter-spacing: -0.04em;
+  text-transform: lowercase;
+  margin: 10px 0 18px;
+}
+
+.countdown-text {
+  font-size: 1rem;
+  line-height: 1.9;
+}
+
+.countdown-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+}
+
+.countdown-label {
+  text-align: right;
+}
+
+.countdown-display {
+  padding: 16px 18px;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  letter-spacing: 0.16em;
+}
+
+.countdown-display .ms {
+  font-size: 0.6em;
+}
+
+.countdown-note {
+  text-align: right;
+}
+
+/* =========================================
+   FRAME 4 — WAITLIST (FORM LEFT)
+========================================= */
+
+.wait-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.3fr);
+  column-gap: 56px;
+  align-items: center;
+}
+
+.wait-left {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.wait-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.wait-copy {
+  max-width: 420px;
+}
+
+.wait-title {
+  font-size: clamp(2.1rem, 3.1vw, 2.6rem);
+  letter-spacing: -0.04em;
+  text-transform: lowercase;
+  margin: 10px 0 18px;
+}
+
+.wait-text {
+  font-size: 1rem;
+  line-height: 1.9;
+}
+
+/* form */
+
+.wait-form {
+  width: 100%;
+  max-width: 380px;
+  padding: 22px 20px 18px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #111;
+  position: relative;
+  font-size: 0.9rem;
+}
+
+.wait-form::before {
+  content: "vgy / entry form";
+  position: absolute;
+  top: -18px;
+  left: 0;
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.wait-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.wait-form input {
+  width: 100%;
+  padding: 9px 10px;
+  border: 1px solid #111;
+  background: transparent;
+  margin-bottom: 14px;
+  font-size: 0.9rem;
+}
+
+.wait-form input::placeholder {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.wait-form button {
+  width: 100%;
+  padding: 10px 10px;
+  border: 1px solid #111;
+  background: #111;
+  color: #fdfbf7;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition: background 0.16s ease, color 0.16s ease, transform 0.12s ease;
+}
+
+.wait-form button:hover {
+  background: transparent;
+  color: #111;
+  transform: translateY(-1px);
+}
+
+.wait-form .note {
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 960px) {
+  .intro-main,
+  .essay-layout,
+  .countdown-layout,
+  .wait-layout {
+    grid-template-columns: 1fr;
+    row-gap: 32px;
+  }
+
+  .intro-right {
+    align-items: flex-start;
+  }
+
+  .intro-meta {
+    text-align: left;
+  }
+
+  .countdown-right {
+    align-items: flex-start;
+  }
+
+  .countdown-note {
+    text-align: left;
+  }
+
+  .wait-right {
+    justify-content: flex-start;
+  }
+
+  .frame-guide {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .letter-v {
+    font-size: clamp(12rem, 20vw, 22rem);
+    line-height: 0.8;
+  }
+
+  .letter-g,
+  .letter-y {
+    font-size: clamp(10rem, 18vw, 20rem);
+    line-height: 0.8;
+  }
+}
+/* ============================
+   WAVEFORM LOADER
+   ============================ */
+#loader {
+  position: fixed;
+  inset: 0;
+  background: #060608;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 9999999;
+
+  /* Moody vignette */
+  box-shadow:
+    inset 0 0 120px rgba(0,0,0,0.9),
+    inset 0 0 200px rgba(0,0,0,1);
+}
+
+#waveCanvas {
+  position: absolute;
+  inset: 0;
+}
+
+/* Noise */
+.loader-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.15;
+  mix-blend-mode: overlay;
+  background: url("https://grainy-gradients.vercel.app/noise.svg");
+}
+
+/* Scanlines */
+.loader-scanlines {
+  position: absolute;
+  inset: 0;
+  opacity: 0.22;
+  mix-blend-mode: overlay;
+
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.05) 0,
+    rgba(255, 255, 255, 0.05) 2px,
+    rgba(0, 0, 0, 0.04) 3px,
+    rgba(0, 0, 0, 0.04) 4px
+  );
+
+  animation: scanMove 0.2s linear infinite;
+}
+.wait-success {
+  margin-top: 1.5rem;
+  line-height: 1.4;
+  opacity: 0;
+}
+
+.wait-success p {
+  margin: 0.2rem 0;
+}
+.wait-loader {
+  display: flex;
+  gap: 8px;
+  margin-top: 1rem;
+  opacity: 0;
+}
+
+.loader-dot {
+  width: 6px;
+  height: 6px;
+  background: rgba(173, 203, 255, 0.85); /* soft blue like your accents */
+  border-radius: 50%;
+  animation: loaderBlink 0.9s infinite ease-in-out alternate;
+}
+
+.loader-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.loader-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes loaderBlink {
+  0% { opacity: 0.2; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes scanMove {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(4px); }
+}
+
+/* =======================
+   FULL FRAME LOADER
+======================= */
+
+.waitlist-loader-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(248, 248, 248, 0.85); 
+  backdrop-filter: blur(2px);
+  z-index: 9999;
+  opacity: 0;
+}
+
+.bar-loader {
+  display: flex;
+  gap: 6px;
+}
+
+.bar {
+  background: #111;
+  width: 10px;
+  animation: barPulse 0.6s infinite alternate ease-in-out;
+}
+
+/* decreasing heights like your reference image */
+.b1 { height: 22px; animation-delay: 0.00s; }
+.b2 { height: 22px; animation-delay: 0.05s; }
+.b3 { height: 19px; animation-delay: 0.10s; }
+.b4 { height: 16px; animation-delay: 0.15s; }
+.b5 { height: 12px; animation-delay: 0.20s; }
+.b6 { height: 10px; animation-delay: 0.25s; }
+.b7 { height: 7px; animation-delay: 0.30s; }
+.b8 { height: 5px; animation-delay: 0.35s; }
+.b9 { height: 3px; animation-delay: 0.40s; }
+.b10 { height: 2px; animation-delay: 0.45s; }
+
+@keyframes barPulse {
+  0% { transform: scaleY(0.6); opacity: 0.5; }
+  100% { transform: scaleY(1); opacity: 1; }
+}
+/* =========================================
+   FULLSCREEN COUNTDOWN OVERLAY
+========================================= */
+
+.countdown-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(248, 246, 240, 0.96); /* same paper vibe */
+  backdrop-filter: blur(2px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none; /* important for scroll! */
+  transform: scale(1);
+}
+
+
+.countdown-overlay-inner {
+  text-align: center;
+  letter-spacing: 0.12em;
+  text-transform: lowercase;
+}
+
+#countdown-overlay-value {
+  font-size: clamp(3rem, 10vw, 6rem);
+  margin-bottom: 0.6rem;
+}
+
+.countdown-overlay-label {
+  opacity: 0.6;
+}

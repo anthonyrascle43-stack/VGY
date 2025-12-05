@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>VGY — Viginty</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Typefaces -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=EB+Garamond:wght@400;500;600&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+
+<div id="loader">
+  <canvas id="waveCanvas"></canvas>
+  <div class="loader-noise"></div>
+  <div class="loader-scanlines"></div>
+</div>
+
+
+
+  <!-- grain -->
+  <div class="paper-noise"></div>
+
+  <div class="scroll-shell">
+    <div class="panels">
+
+      <!-- FRAME 1 — INTRO / HERO -->
+      <section class="panel panel-intro">
+        <div class="poster intro-layout">
+
+          <header class="intro-header">
+            <span class="intro-mark serif">VIGNITY / ISSUE 000</span>
+            <span class="intro-mark serif">LISTENING STUDY</span>
+          </header>
+
+          <div class="intro-main">
+            <!-- LEFT: HUGE V, bottom-left -->
+            <div class="intro-col intro-left">
+              <span class="letter letter-v">V</span>
+            </div>
+
+            <!-- MIDDLE: hero artwork -->
+            <figure class="intro-image">
+              <!-- swap with your real artwork file -->
+              <img src="../img/frame1.13.jpg" alt="VGY artwork">
+            </figure>
+
+            <!-- RIGHT: text + GY stacked, bottom-right -->
+            <div class="intro-col intro-right">
+              <div class="intro-meta serif small">
+                VGY is a listening magazine grown out of your own history — not a
+                recommendation engine, but an archive of habits, ghosts and loops.
+              </div>
+
+              <div class="intro-gy">
+                <span class="letter letter-g">G</span>
+                <span class="letter letter-y">Y</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- FRAME 2 — SPLIT: ESSAY + MUSIC SPREAD -->
+      <section class="panel panel-essay">
+        <div class="poster essay-layout">
+
+          <!-- LEFT: manifesto text -->
+          <div class="essay-left">
+            <div class="essay-label mono tiny">VGY / ON REPETITION</div>
+            <h2 class="essay-title serif">a new way to abuse playlists.</h2>
+
+            <div class="essay-body serif faded">
+              <p>
+                A strange thing has been happening in music. We have endless access,
+                yet we keep playing the same thirty songs on repeat, like a nervous tick.
+                Algorithms observe this behaviour and quietly reinforce it, folding each
+                half-remembered track back into a perfectly optimised loop.
+              </p>
+              <p class="accent-blue">
+                VGY exists to do the opposite. It treats your history like a physical archive:
+                a stack of mislabelled records, bootleg CDs, unnamed playlists and late-night
+                experiments. Instead of smoothing the noise, it leans into it — reorganising
+                your listening into issues, chapters, strange little side-stories.
+              </p>
+            </div>
+          </div>
+
+          <!-- RIGHT: music layout like inspo #3 -->
+          <div class="essay-right">
+            <div class="music-header-row">
+              <span class="mono tiny">01.2026</span>
+              <span class="music-brand serif">vignity</span>
+              <span class="mono tiny">essence</span>
+            </div>
+
+            <div class="music-title serif">music</div>
+
+            <div class="music-grid">
+              <article class="music-card">
+                <div class="music-cover">
+                  <!-- drop a real cover here -->
+                  <img src="../img/rev8617.jpg" alt="Rev8617 – Skee Mask">
+                </div>
+                <div class="music-meta mono small">
+                  <div class="track">rev8617</div>
+                  <div class="artist">skee mask</div>
+                </div>
+              </article>
+
+              <article class="music-card">
+                <div class="music-cover">
+                  <img src="../img/hyperlands.jpg" alt="Hyperlands – Aïsha Devi">
+                </div>
+                <div class="music-meta mono small">
+                  <div class="track">hyperlands</div>
+                  <div class="artist">aïsha devi</div>
+                </div>
+              </article>
+
+              <article class="music-card">
+                <div class="music-cover">
+                  <img src="../img/simple stuff.jpg" alt="Simple Stuff – Loraine James">
+                </div>
+                <div class="music-meta mono small">
+                  <div class="track">simple stuff</div>
+                  <div class="artist">loraine james</div>
+                </div>
+              </article>
+            </div>
+
+            <p class="music-caption serif">
+              A few recent fragments that keep looping in the background while we build VGY.
+              Not a playlist, more like the margin notes of someone who forgot to log off.
+            </p>
+          </div>
+
+        </div>
+      </section>
+        <!-- FULLSCREEN COUNTDOWN OVERLAY -->
+        <div id="countdown-overlay" class="countdown-overlay" style="display:none;">
+          <div class="countdown-overlay-inner mono">
+            <!-- we just mirror the current countdown text -->
+            <div id="countdown-overlay-value"></div>
+            <div class="countdown-overlay-label tiny">launch · 18·01·2026</div>
+          </div>
+        </div>
+
+      <!-- FRAME 3 — COUNTDOWN -->
+      <section class="panel panel-countdown">
+        <div class="poster countdown-layout">
+          <div class="countdown-left">
+            <div class="mono tiny">FRAME 000</div>
+            <h2 class="countdown-title serif">when the loop breaks, vgy boots.</h2>
+            <p class="countdown-text serif">
+              we treat launch like a cut in the waveform — the moment your
+              listening breaks out of the safe loop and spills into something
+              stranger, slower, less optimised.
+            </p>
+          </div>
+
+          <div class="countdown-right">
+            <div class="countdown-label mono tiny">
+              launch timer · 18·01·2026
+            </div>
+            <div id="countdown" class="countdown-display mono"></div>
+            <p class="countdown-note mono tiny faded accent-blue">
+              milliseconds are real and vgy uses every single one of them.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FRAME 4 — EMAIL SIGNUP -->
+<section class="panel panel-waitlist">
+  <div class="poster wait-layout">
+
+    <!-- LEFT: subscription form (bigger) -->
+    <div class="wait-left">
+    <form id="waitlist-form" class="wait-form mono"
+          action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScyqSWyhne4YMffbV_-ipSUR4kiZ28tmL6WwOnJOLFia58aDQ/formResponse"
+          method="POST"
+          target="hidden_iframe">
+
+      <label for="email">email</label>
+      <input id="email" name="entry.1640141161" type="email" placeholder="you@vgy.audio" required>
+
+      <button type="submit">join waiting list</button>
+
+      <p class="note tiny accent-blue">
+        your address lives here until launch, then it’s wiped like a crashed hard drive.
+      </p>
+    </form>
+
+<!-- Hidden iframe to prevent redirect -->
+<iframe name="hidden_iframe" style="display:none;"></iframe>
+
+
+
+      <!-- Success message -->
+      <div id="waitlist-success" class="wait-success mono" style="display:none;">
+        <p class="tiny accent-blue">you’re inside the first waveform.</p>
+        <p class="serif">the issue will find you when vgy boots.</p>
+      </div>
+    </div>
+
+    <!-- RIGHT: copy -->
+    <div class="wait-right">
+      <div class="wait-copy">
+        <div class="mono tiny">ISSUE ZERO / ENTRY</div>
+        <h2 class="wait-title serif">be inside the first waveform.</h2>
+        <p class="wait-text serif">
+          drop an address, we send one message when vgy quietly goes live.
+          no funnel, no nurture sequence — just the door code and the first
+          issue of your own listening.
+        </p>
+      </div>
+    </div>
+
+    <!-- FULL FRAME LOADER (correct position) -->
+    <div id="waitlist-loader" class="waitlist-loader-overlay" style="display:none;">
+      <div class="bar-loader">
+        <div class="bar b1"></div>
+        <div class="bar b2"></div>
+        <div class="bar b3"></div>
+        <div class="bar b4"></div>
+        <div class="bar b5"></div>
+        <div class="bar b6"></div>
+        <div class="bar b7"></div>
+        <div class="bar b8"></div>
+        <div class="bar b9"></div>
+        <div class="bar b10"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+    </div>
+  </div>
+
+  <!-- bottom guide / timeline -->
+    <div class="frame-guide">
+      <div class="guide-track"></div>
+  </div>
+
+    <div class="guide-ticks">
+      <span class="tick active">frame 01</span>
+      <span class="tick">frame 02</span>
+      <span class="tick">18·01·2026</span>
+      <span class="tick">entry</span>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
