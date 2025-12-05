@@ -158,6 +158,11 @@ body {
 .panel-intro .poster {
   flex-direction: column;
   justify-content: space-between;
+  /* Prevent Chrome from cutting bottom letters */
+.panel,
+.poster {
+  padding-bottom: 40px; /* enough for V / G / Y */
+}
 }
 
 .intro-header {
