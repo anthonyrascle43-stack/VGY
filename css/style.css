@@ -877,50 +877,41 @@ body {
     inset: auto !important;
   }
 
-  /* -------------------------------
-     V — inside TOP-LEFT of image
-  -------------------------------- */
+/* ============================================
+   MOBILE — FINAL WORKING POSITION (TRANSFORM)
+============================================ */
+@media (max-width: 768px) {
+
   .intro-monogram-mobile {
-    top: 10vw;     /* move DOWN */
-    left: 6vw;     /* slight right offset */
+    position: absolute;
     z-index: 20;
+    /* anchor relative to intro-main */
+    top: 45vw;               /* pushes it DOWN into the image */
+    left: 8vw;
+    transform: translateY(-50%);  /* fine-tune */
   }
 
   .intro-monogram-mobile .letter-v {
-    font-size: 18vw;
+    font-size: 20vw;
     line-height: 0.8;
   }
 
-  /* -------------------------------
-     GY — inside BOTTOM-RIGHT of image
-  -------------------------------- */
   .intro-gy {
-    bottom: 20vw;   /* PULL UP strongly */
-    right: 6vw;     /* right offset matching V */
+    position: absolute;
     z-index: 20;
-
-    display: flex !important;
-    flex-direction: row;
+    /* anchor relative to intro-main */
+    top: 110vw;               /* pushes it UP into the bottom of image */
+    right: 8vw;
+    transform: translateY(-50%);
+    display: flex;
     gap: 2vw;
   }
 
   .intro-gy .letter-g,
   .intro-gy .letter-y {
-    font-size: 14vw;
+    font-size: 16vw;
     line-height: 0.8;
   }
-
-  /* Push text down so GY never overlaps it */
-  .intro-meta {
-    max-width: 92%;
-    text-align: left !important;
-    line-height: 1.6;
-    margin-top: 20vw;
-  }
-
-  /* Fix poster padding */
-  .panel-intro .poster {
-    padding: 22px 18px !important;
-  }
+}
 }
 
