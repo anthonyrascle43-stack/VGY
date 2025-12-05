@@ -1,13 +1,11 @@
-// DISABLE HORIZONTAL SCROLL ANIMATION ON MOBILE
+// DISABLE HORIZONTAL SCROLL ON MOBILE
 const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
-if (!isMobile) {
-  // ONLY run GSAP horizontal scroll on desktop
-  gsap.registerPlugin(ScrollTrigger);
-} else {
-  console.log("Mobile mode: horizontal scroll disabled");
-}
+// Register GSAP
 gsap.registerPlugin(ScrollTrigger);
+
+// Make hScroll accessible everywhere
+let hScroll = null;
 
 window.addEventListener("load", () => {
   const panels = gsap.utils.toArray(".panel");
@@ -15,92 +13,81 @@ window.addEventListener("load", () => {
   const ticks = gsap.utils.toArray(".guide-ticks .tick");
 
   if (!panels.length || !container) return;
-if (!isMobile) {
-  // ================================
-  // HORIZONTAL SCROLL (pinned)
-  // ================================
-  const hScroll = gsap.to(panels, {
-    
-    xPercent: -100 * (panels.length - 1),
-    ease: "none",
-    scrollTrigger: {
-      id: "hscroll",
-      trigger: ".scroll-shell",
-      pin: true,
-      scrub: 1,
-      snap: 1 / (panels.length - 1),
-      end: () => "+=" + container.offsetWidth
-    }
-  });
-// -------------------------------------
-// ELEGANT SCROLL ZOOM-IN COUNTDOWN
-// -------------------------------------
 
-const overlay = document.getElementById("countdown-overlay");
-const overlayVal = document.getElementById("countdown-overlay-value");
-const liveCount  = document.getElementById("countdown");
-
-// Keep milliseconds alive inside overlay
-gsap.ticker.add(() => {
-  overlayVal.textContent = liveCount.textContent;
-});
-
-// Much smaller zoom
-const MAX_SCALE = 1.05;  // instead of huge 2.2
-
-ScrollTrigger.create({
-  trigger: ".panel-countdown",
-  containerAnimation: hScroll,
-  start: "center 60%",   // start zooming slightly before center
-  end:   "center 40%",   // finish zooming slightly after center
-  scrub: true,
-  onUpdate: (self) => {
-
-    const p = self.progress; // 0 → 1 → back
-
-    // If outside range → hide overlay completely
-    if (p <= 0 || p >= 1) {
-      overlay.style.display = "none";
-      return;
-    }
-
-    // Show overlay during active window
-    overlay.style.display = "flex";
-
-    // Subtle fade (not full opacity)
-    gsap.to(overlay, {
-      opacity: p * 0.9,
-      duration: 0.1,
-      overwrite: true
-    });
-
-    // Smooth zoom
-    gsap.to(overlay.children[0], {
-      scale: 1 + p * (MAX_SCALE - 1),
-      duration: 0.1,
-      overwrite: true
-    });
-  }
-});
-
-
-  // ================================
-  // Wave-like vertical drift per panel
-  // ================================
-  panels.forEach((panel, index) => {
-    const direction = index % 2 === 0 ? -1 : 1;
-    gsap.to(panel, {
-      yPercent: 6 * direction,
-      ease: "sine.inOut",
+  // DESKTOP ONLY — horizontal scroll
+  if (!isMobile) {
+    hScroll = gsap.to(panels, {
+      xPercent: -100 * (panels.length - 1),
+      ease: "none",
       scrollTrigger: {
+        id: "hscroll",
         trigger: ".scroll-shell",
-        start: "top top",
-        end: () => "+=" + container.offsetWidth,
-        scrub: true
+        pin: true,
+        scrub: 1,
+        snap: 1 / (panels.length - 1),
+        end: () => "+=" + container.offsetWidth
       }
     });
-  });
-}
+
+    // COUNTDOWN ZOOM EFFECT (desktop only)
+    const overlay = document.getElementById("countdown-overlay");
+    const overlayVal = document.getElementById("countdown-overlay-value");
+    const liveCount  = document.getElementById("countdown");
+
+    if (overlay && overlayVal && liveCount) {
+      gsap.ticker.add(() => {
+        overlayVal.textContent = liveCount.textContent;
+      });
+
+      const MAX_SCALE = 1.05;
+
+      ScrollTrigger.create({
+        trigger: ".panel-countdown",
+        containerAnimation: hScroll,
+        start: "center 60%",
+        end: "center 40%",
+        scrub: true,
+        onUpdate: (self) => {
+          const p = self.progress;
+
+          if (p <= 0 || p >= 1) {
+            overlay.style.display = "none";
+            return;
+          }
+
+          overlay.style.display = "flex";
+
+          gsap.to(overlay, {
+            opacity: p * 0.9,
+            duration: 0.1,
+            overwrite: true
+          });
+
+          gsap.to(overlay.children[0], {
+            scale: 1 + p * (MAX_SCALE - 1),
+            duration: 0.1,
+            overwrite: true
+          });
+        }
+      });
+    }
+
+    // Wavy drift per panel
+    panels.forEach((panel, index) => {
+      const direction = index % 2 === 0 ? -1 : 1;
+      gsap.to(panel, {
+        yPercent: 6 * direction,
+        ease: "sine.inOut",
+        scrollTrigger: {
+          trigger: ".scroll-shell",
+          start: "top top",
+          end: () => "+=" + container.offsetWidth,
+          scrub: true
+        }
+      });
+    });
+  }
+
   // ================================
   // Active tick per frame
   // ================================
