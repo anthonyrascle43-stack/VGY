@@ -928,35 +928,48 @@ body {
   }
 }
 /* ============================================
-   MOBILE — FINE TUNING FOR V + GY OVER IMAGE
+   MOBILE — CORRECTED ANCHOR + PERFECT POSITIONING
 ============================================ */
 @media (max-width: 768px) {
 
-  /* Ensure image is positioning context */
+  /* Force the image to be the anchor */
   .intro-image {
-    position: relative;
+    position: relative !important;
+    width: 100%;
+    max-width: 460px;
+    margin: 0 auto;
+    order: 2;
   }
 
-  /* --- V (top-left, moved down INTO the image) --- */
+  /* Remove any previous top/bottom offsets */
+  .intro-monogram-mobile,
+  .intro-gy {
+    position: absolute !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* -------------------------------
+     V — inside TOP-LEFT of image
+  -------------------------------- */
   .intro-monogram-mobile {
-    position: absolute;
-    top: 8vw;       /* move down (was -6vw) */
-    left: 6vw;      /* softened left offset */
-    z-index: 10;
+    top: 12vw;       /* DOWN into the image */
+    left: 6vw;       /* offset from left edge */
+    z-index: 20;
   }
 
   .intro-monogram-mobile .letter-v {
-    font-size: 18vw; /* slightly smaller for elegance */
+    font-size: 20vw;
     line-height: 0.8;
   }
 
-  /* --- GY (bottom-right, pulled UP into image) --- */
+  /* -------------------------------
+     GY — inside BOTTOM-RIGHT of image
+  -------------------------------- */
   .intro-gy {
-    position: absolute;
-    bottom: 10vw;     /* pull upward (was -8vw) */
-    right: 6vw;      /* keep margin from edge */
-    z-index: 10;
-
+    bottom: 12vw;     /* UPWARD into the image */
+    right: 6vw;       /* offset from right edge */
+    z-index: 20;
     display: flex !important;
     flex-direction: row;
     gap: 2vw;
@@ -964,12 +977,13 @@ body {
 
   .intro-gy .letter-g,
   .intro-gy .letter-y {
-    font-size: 15vw;  /* slightly smaller */
+    font-size: 16vw;
     line-height: 0.8;
   }
 
-  /* Add spacing below image so GY doesn’t overlap the text */
+  /* Push text further down so GY never overlaps */
   .intro-meta {
-    margin-top: 22vw; 
+    margin-top: 25vw;
   }
 }
+
