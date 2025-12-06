@@ -160,11 +160,29 @@ body {
   justify-content: space-between;
 }
 
-  /* Prevent Chrome from cutting bottom letters */
-.panel,
-.poster {
-  padding-bottom: 40px; /* enough for V / G / Y */
+.panel-intro .poster,
+.intro-main,
+.intro-left,
+.intro-right {
+  overflow: visible !important;
 }
+
+.panel-intro .poster {
+  padding-bottom: 80px !important;
+}
+
+/* Optional Chrome-only fallback */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  .panel-intro .poster {
+    padding-bottom: 120px !important;
+  }
+}
+
+.letter {
+  display: inline-block;
+  overflow: visible;
+}
+
 
 .intro-header {
   display: flex;
