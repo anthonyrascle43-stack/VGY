@@ -917,7 +917,11 @@ body {
   .countdown-layout {
     padding: 0 18px;
   }
-
+  
+  #waveCanvas {
+    width: 100vw;
+    height: 100vh;     /* keeps it fullscreen for clarity */
+  }
   /* Make the countdown block more compact */
   .countdown-display {
     font-size: 8vw;      /* scales perfectly with screens */
