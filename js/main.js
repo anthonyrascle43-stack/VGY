@@ -323,7 +323,7 @@ if (window.innerWidth <= 768) {
       }
     });
   }, {
-    threshold: 0.35   // frame becomes “active” when ~35% in view
+    threshold: 0.7   // frame becomes “active” when ~35% in view
   });
 
   document.querySelectorAll(".panel").forEach(panel => {
