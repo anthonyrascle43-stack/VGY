@@ -160,38 +160,24 @@ body {
   justify-content: space-between;
 }
 
-.panel-intro .poster,
-.intro-main,
-.intro-left,
-.intro-right {
+/* Prevent Chrome from clipping content inside the pinned GSAP container */
+.scroll-shell,
+.panels {
   overflow: visible !important;
 }
-
-.panel-intro .poster {
-  padding-bottom: 80px !important;
-}
-
-/* Optional Chrome-only fallback */
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-  .panel-intro .poster {
-    padding-bottom: 120px !important;
-  }
-}
-
-.letter {
-  display: inline-block;
-  overflow: visible;
-}
-/* Desktop only: give extra breathing room */
 @media (min-width: 769px) {
-  .panel-intro {
-    height: 120vh !important;
-  }
-
   .panel-intro .poster {
-    height: 120vh !important;
     padding-bottom: 120px !important;
     overflow: visible !important;
+  }
+
+  .intro-main {
+    overflow: visible !important;
+  }
+
+  .letter {
+    display: inline-block;
+    overflow: visible;
   }
 }
 

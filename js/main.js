@@ -21,14 +21,17 @@ window.addEventListener("load", () => {
     hScroll = gsap.to(panels, {
       xPercent: -100 * (panels.length - 1),
       ease: "none",
-      scrollTrigger: {
-        id: "hscroll",
-        trigger: ".scroll-shell",
-        pin: true,
-        scrub: 1,
-        snap: 1 / (panels.length - 1),
-        end: () => "+=" + container.offsetWidth
-      }
+        scrollTrigger: {
+          id: "hscroll",
+          trigger: ".scroll-shell",
+          pin: true,
+          pinSpacing: true,      // Ensures panels get the height they need
+          anticipatePin: 1,      // Prevents Chrome’s clipping during pin
+          scrub: 1,
+          snap: 1 / (panels.length - 1),
+          end: () => "+=" + container.offsetWidth
+        }
+
     });
 
     // COUNTDOWN ZOOM EFFECT (desktop only)
