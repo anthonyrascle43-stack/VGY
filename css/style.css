@@ -160,26 +160,13 @@ body {
   justify-content: space-between;
 }
 
-/* Prevent Chrome from clipping content inside the pinned GSAP container */
-.scroll-shell,
-.panels {
-  overflow: visible !important;
-}
 @media (min-width: 769px) {
-  .panel-intro .poster {
-    padding-bottom: 120px !important;
-    overflow: visible !important;
-  }
-
-  .intro-main {
-    overflow: visible !important;
-  }
-
   .letter {
-    display: inline-block;
-    overflow: visible;
+    transform: translateZ(0);
+    will-change: transform;
   }
 }
+
 
 
 .intro-header {
