@@ -958,10 +958,10 @@ body {
 
   .panel {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(28px);
     transition:
-      opacity 0.5s ease-out,
-      transform 0.6s cubic-bezier(.25, .46, .45, .94);
+      opacity 0.85s ease-out,
+      transform 0.9s cubic-bezier(.22, .55, .25, .95);
   }
 
   .panel.is-visible {
