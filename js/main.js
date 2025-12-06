@@ -314,4 +314,20 @@ function restructureMobileIntro() {
 
 window.addEventListener("load", restructureMobileIntro);
 
+if (window.innerWidth <= 768) {
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+      }
+    });
+  }, {
+    threshold: 0.35   // frame becomes “active” when ~35% in view
+  });
+
+  document.querySelectorAll(".panel").forEach(panel => {
+    observer.observe(panel);
+  });
+}
 

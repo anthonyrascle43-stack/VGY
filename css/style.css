@@ -951,4 +951,22 @@ body {
     max-width: 95%;
   }
 }
+/* =========================================
+   MOBILE — Soft Fade-In on Frame Arrival
+========================================= */
+@media (max-width: 768px) {
+
+  .panel {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 0.5s ease-out,
+      transform 0.6s cubic-bezier(.25, .46, .45, .94);
+  }
+
+  .panel.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
