@@ -946,7 +946,7 @@ body {
 
   /* Slightly reduce paragraph width */
   .countdown-note {
-    font-size: 0.9rem;
+    font-size: 0.7rem;
     line-height: 1.6;
     max-width: 95%;
   }
