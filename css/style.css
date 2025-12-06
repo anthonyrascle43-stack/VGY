@@ -882,4 +882,30 @@ body {
     margin-top: 8vw;
   }
 }
+/* =========================================
+   MOBILE FIX — Proper Wave Loader Scaling
+========================================= */
+@media (max-width: 768px) {
+
+  #loader {
+    padding: 0;
+  }
+
+  /* Keep canvas square + centered */
+  #waveCanvas {
+    width: 100vw !important;
+    height: 100vw !important; /* square makes waveform symmetrical */
+    max-height: 80vh !important; /* prevents overflow */
+    max-width: 80vh !important;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Optional: reduce visual intensity on small screens */
+  .loader-noise,
+  .loader-scanlines {
+    opacity: 0.12;
+  }
+}
 
