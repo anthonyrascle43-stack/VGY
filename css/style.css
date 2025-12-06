@@ -850,83 +850,40 @@ body {
     position: relative;
   }
 
-  /* IMAGE becomes the anchor */
-  .intro-image {
-    position: relative !important;
-    width: 100%;
-    max-width: 460px;
-    order: 2;
-    margin: 12vw 0 14vw 0; /* spacing above and below for overlaps */
-  }
-
-  .intro-image img {
-    width: 100%;
-    display: block;
-    height: auto;
-    border-radius: 6px;
-    object-fit: cover;
-    box-shadow: 0 8px 28px rgba(0,0,0,0.18);
-  }
-
-  /* Remove ALL previous positioning */
-  .intro-monogram-mobile,
-  .intro-gy {
-    position: absolute !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    inset: auto !important;
-  }
-
-  /* make them absolute to the viewport */
-  .intro-monogram-mobile,
-  .intro-gy {
-    z-index: 50;
-    pointer-events: none; /* don’t block taps */
-  }
-
-  /* V size + default offset */
-  .intro-monogram-mobile .letter-v {
-    font-size: 20vw;
-    line-height: 0.8;
-  }
-
-  /* GY size */
-  .intro-gy .letter-g,
-  .intro-gy .letter-y {
-    font-size: 16vw;
-    line-height: 0.8;
-  }
-}
-@media (max-width: 768px) {
-
   .intro-image {
     position: relative;
   }
 
   .intro-monogram-mobile {
     position: absolute;
-    top: 4vw;
-    left: 4vw;
-    z-index: 20;
+    top: 4vw;       /* adjust */
+    left: 4vw;      /* adjust */
+    z-index: 10;
+  }
+
+  .intro-monogram-mobile .letter-v {
+    font-size: 22vw;
+    line-height: 0.8;
   }
 
   .intro-gy {
     position: absolute;
-    bottom: 4vw;
-    right: 4vw;
-    z-index: 20;
-  }
-
-  .intro-monogram-mobile .letter-v {
-    font-size: 20vw;
-    line-height: 0.8;
+    bottom: 4vw;    /* adjust */
+    right: 6vw;     /* adjust */
+    display: flex;
+    gap: 2vw;
+    z-index: 10;
   }
 
   .intro-gy .letter-g,
   .intro-gy .letter-y {
-    font-size: 16vw;
+    font-size: 18vw;
     line-height: 0.8;
   }
-}
 
+  /* Ensure text goes UNDER the image */
+  .intro-meta {
+    margin-top: 8vw;
+  }
+}
 
