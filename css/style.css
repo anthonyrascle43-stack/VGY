@@ -619,7 +619,7 @@ body {
     rgba(0, 0, 0, 0.04) 4px
   );
 
-  animation: scanMove 0.2s linear infinite;
+  animation: scanMove 0.5s linear infinite;
 }
 .wait-success {
   margin-top: 1.5rem;
@@ -906,6 +906,49 @@ body {
   .loader-noise,
   .loader-scanlines {
     opacity: 0.12;
+  }
+}
+/* =========================================
+   MOBILE — Countdown Styling Fix
+========================================= */
+@media (max-width: 768px) {
+
+  /* Reduce left/right padding of the frame */
+  .countdown-layout {
+    padding: 0 18px;
+  }
+
+  /* Make the countdown block more compact */
+  .countdown-display {
+    font-size: 8vw;      /* scales perfectly with screens */
+    letter-spacing: 0.1em;
+    padding: 10px 0;
+    text-align: left;
+  }
+
+  /* Tighter, cleaner */
+  .countdown-label {
+    font-size: 0.8rem;
+    margin-bottom: 8px;
+  }
+
+  /* Reduce gap between main timer and ms */
+  .countdown-display .ms {
+    font-size: 0.5em;
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* Avoid weird spacing above the blue paragraph */
+  .countdown-right {
+    gap: 4px !important;
+  }
+
+  /* Slightly reduce paragraph width */
+  .countdown-note {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    max-width: 95%;
   }
 }
 
