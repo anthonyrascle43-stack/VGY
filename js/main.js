@@ -316,18 +316,29 @@ window.addEventListener("load", restructureMobileIntro);
 
 if (window.innerWidth <= 768) {
 
-  const observer = new IntersectionObserver((entries) => {
+  const panels = document.querySelectorAll(".panel");
+
+  const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
+
       if (entry.isIntersecting) {
+        // New frame entering
         entry.target.classList.add("is-visible");
+        entry.target.classList.remove("is-hidden");
+
+        // Hide all other panels
+        panels.forEach(panel => {
+          if (panel !== entry.target) {
+            panel.classList.remove("is-visible");
+            panel.classList.add("is-hidden");
+          }
+        });
       }
     });
   }, {
-    threshold: 0.7   // frame becomes “active” when ~35% in view
+    threshold: 0.7
   });
 
-  document.querySelectorAll(".panel").forEach(panel => {
-    observer.observe(panel);
-  });
+  panels.forEach(panel => observer.observe(panel));
 }
 
