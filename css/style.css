@@ -161,9 +161,26 @@ body {
 }
 
 @media (min-width: 769px) {
-  .letter {
-    transform: translateZ(0);
-    will-change: transform;
+  .letter-overlay-desktop {
+    position: fixed;
+    inset: 0;
+    pointer-events: none; 
+    z-index: 999;
+  }
+
+  .letter-overlay-desktop .letter-v {
+    position: absolute;
+    bottom: 40px;
+    left: 60px;
+  }
+
+  .letter-overlay-desktop .intro-gy {
+    position: absolute;
+    bottom: 40px;
+    right: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
   }
 }
 

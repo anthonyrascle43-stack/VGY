@@ -314,4 +314,16 @@ function restructureMobileIntro() {
 
 window.addEventListener("load", restructureMobileIntro);
 
+function extractDesktopLetters() {
+  if (window.innerWidth < 769) return; // mobile not affected
+
+  const overlay = document.querySelector(".letter-overlay-desktop");
+  const V = document.querySelector(".letter-v");
+  const GY = document.querySelector(".intro-gy");
+
+  if (overlay && V) overlay.appendChild(V);
+  if (overlay && GY) overlay.appendChild(GY);
+}
+
+window.addEventListener("load", extractDesktopLetters);
 
